@@ -2,6 +2,9 @@
   <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
   <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
   <classpathentry kind="src" path="target/generated-sources/api" including="**/*.java"/>
+  <classpathentry kind="src" path="target/generated-sources/repository-service-client" including="**/*.java"/>
+  <classpathentry kind="src" path="target/generated-sources/product-service-client" including="**/*.java"/>
+  <classpathentry kind="src" path="target/generated-sources/media-service-client" including="**/*.java"/>
   <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar"/>
@@ -13,7 +16,7 @@
   <classpathentry kind="var" path="M2_REPO/javax/mail/mailapi/1.4.3/mailapi-1.4.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar"/>
   <classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/external/aopalliance-repackaged/2.4.0-b06/aopalliance-repackaged-2.4.0-b06.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/external/aopalliance-repackaged/2.4.0-b09/aopalliance-repackaged-2.4.0-b09.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/hybris/service-sdk/libraries/api-console/3.9.0/api-console-3.9.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/external/asm-all-repackaged/2.4.0-b06/asm-all-repackaged-2.4.0-b06.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-debug-all/5.0.2/asm-debug-all-5.0.2.jar"/>
@@ -41,9 +44,9 @@
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-validator/5.1.2.Final/hibernate-validator-5.1.2.Final.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/hk2/2.4.0-b06/hk2-2.4.0-b06.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/hk2-api/2.4.0-b06/hk2-api-2.4.0-b06.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/hk2-api/2.4.0-b09/hk2-api-2.4.0-b09.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/hk2-config/2.4.0-b06/hk2-config-2.4.0-b06.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/hk2-locator/2.4.0-b06/hk2-locator-2.4.0-b06.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/hk2-locator/2.4.0-b09/hk2-locator-2.4.0-b09.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/hk2-runlevel/2.4.0-b06/hk2-runlevel-2.4.0-b06.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/hk2-utils/2.4.0-b06/hk2-utils-2.4.0-b06.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.3.2/jackson-annotations-2.3.2.jar"/>
@@ -61,9 +64,9 @@
   <classpathentry kind="var" path="M2_REPO/org/glassfish/web/javax.el/2.2.4/javax.el-2.2.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/hk2/external/javax.inject/2.4.0-b06/javax.inject-2.4.0-b06.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/slf4j/jcl-over-slf4j/1.7.9/jcl-over-slf4j-1.7.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/jcl-over-slf4j/1.7.10/jcl-over-slf4j-1.7.10.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/jersey/ext/jersey-bean-validation/2.14/jersey-bean-validation-2.14.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/glassfish/jersey/core/jersey-client/2.14/jersey-client-2.14.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/glassfish/jersey/core/jersey-client/2.16/jersey-client-2.16.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/jersey/core/jersey-common/2.14/jersey-common-2.14.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/jersey/containers/jersey-container-grizzly2-http/2.14/jersey-container-grizzly2-http-2.14.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/jersey/containers/jersey-container-grizzly2-servlet/2.14/jersey-container-grizzly2-servlet-2.14.jar"/>
@@ -82,12 +85,12 @@
   <classpathentry kind="var" path="M2_REPO/com/github/fge/json-schema-core/1.2.5/json-schema-core-1.2.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/github/fge/json-schema-validator/2.2.6/json-schema-validator-2.2.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/jsr305/2.0.1/jsr305-2.0.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/slf4j/jul-to-slf4j/1.7.9/jul-to-slf4j-1.7.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/jul-to-slf4j/1.7.10/jul-to-slf4j-1.7.10.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.12/junit-4.12.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/libphonenumber/libphonenumber/6.2/libphonenumber-6.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/hybris/service-sdk/libraries/libraries/3.9.0/libraries-3.9.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/slf4j/log4j-over-slf4j/1.7.9/log4j-over-slf4j-1.7.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/log4j-over-slf4j/1.7.10/log4j-over-slf4j-1.7.10.jar"/>
   <classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-classic/1.1.2/logback-classic-1.1.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-core/1.1.2/logback-core-1.1.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/hybris/service-sdk/libraries/logging/3.9.0/logging-3.9.0.jar"/>
@@ -98,9 +101,10 @@
   <classpathentry kind="var" path="M2_REPO/com/hybris/service-sdk/libraries/pattern-support/3.9.0/pattern-support-3.9.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/hybris/raml-parser/raml-parser/0.1.8/raml-parser-0.1.8.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/hybris/service-sdk/libraries/raml-rewriter/3.9.0/raml-rewriter-3.9.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/hybris/ramler/ramler-support/1.0.0/ramler-support-1.0.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/hybris/service-sdk/libraries/security/3.9.0/security-3.9.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.9/slf4j-api-1.7.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.6/slf4j-api-1.7.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/yaml/snakeyaml/1.13/snakeyaml-1.13.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/4.1.4.RELEASE/spring-aop-4.1.4.RELEASE.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/4.1.4.RELEASE/spring-beans-4.1.4.RELEASE.jar"/>

@@ -18,6 +18,7 @@
 	<properties>
 		<!-- hybris projects -->
 		<service-sdk.version>3.9.0</service-sdk.version>
+		<ramler.version>1.0.0</ramler.version>
 
 		<!-- plugins -->
 		<jetty.plugin.version>9.2.6.v20141205</jetty.plugin.version>
@@ -39,6 +40,12 @@
 			<artifactId>libraries</artifactId>
 			<version>${service-sdk.version}</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>com.hybris.ramler</groupId>
+            <artifactId>ramler-support</artifactId>
+            <version>${ramler.version}</version>
+        </dependency>
 
 		<!-- Jersey Dependencies -->
 		<dependency>
@@ -170,7 +177,52 @@
 					</webApp>
 				</configuration>
 			</plugin>
-			
+			<!-- generate configuration service client -->
+            <plugin>
+                <groupId>com.hybris.ramler</groupId>
+                <artifactId>ramler-maven-plugin</artifactId>
+                <version>${ramler.version}</version>
+                <executions>
+                    <execution>
+                        <id>configuration-service-client</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourceRamlUri>https://api.yaas.io/hybris/repository/b1/api-console/raml/api/document-repository.raml</sourceRamlUri>
+                            <targetFolder>${project.basedir}/target/generated-sources/repository-service-client/</targetFolder>
+                            <basePackage>com.grumpy.repository.client</basePackage>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>product-service-client</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourceRamlUri>https://api.yaas.io/product/v3/api-console/raml/api/api-specification.raml</sourceRamlUri>
+                            <targetFolder>${project.basedir}/target/generated-sources/product-service-client/</targetFolder>
+                            <basePackage>com.grumpy.product.client</basePackage>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>media-service-client</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourceRamlUri>https://api.yaas.io/hybris/media-repository/b1/api-console/raml/api/media-repository.raml</sourceRamlUri>
+                            <targetFolder>${project.basedir}/target/generated-sources/media-service-client/</targetFolder>
+                            <basePackage>com.grumpy.media.client</basePackage>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>           
 
 		</plugins>
 		<pluginManagement>
@@ -193,6 +245,14 @@
 											<goal>generate</goal>
 										</goals>
 									</pluginExecutionFilter>
+									<pluginExecutionFilter>
+                                        <groupId>com.hybris.ramler</groupId>
+                                        <artifactId>ramler-maven-plugin</artifactId>
+                                        <version>1.0.0-SNAPSHOT</version>
+                                        <goals>
+                                            <goal>generate</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
 									<action>
 										<ignore />
 									</action>

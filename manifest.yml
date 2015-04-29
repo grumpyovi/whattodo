@@ -1,0 +1,17 @@
+---
+applications:
+- name: grumpyapp
+  buildpack: java_buildpack
+  instances: 2
+  memory: 1024M
+  host: grumpyapp-v1
+  domain: cf3.hybris.com
+  path: target/whattodo.war
+  env:
+    ENV_NAME: hybris_hackathon
+    TEAM_NAME: hybris_hackathon
+    CLIENT_ID: G0SZaJlyk0fYUhyURitACRmaaT08NPcU
+    CLIENT_SECRET: jEN3yZ3ZAsb3s77P
+    MULTI_TENANT: "true"
+    MONITORING_ENABLED: "false"
+  
