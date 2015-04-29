@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title":"Whattodo",
+  "type":"object",
+  "properties":
+  {
+    "id":
+    {
+      "type":"string"
+    },
+    "owner":
+    {
+      "type":"string",
+      "pattern":"^.+"
+    },
+    "description":
+    {
+        "$ref" : "https://api.yaas.io/patterns/v1/schema-localized.json"
+    },
+    "createdAt":
+    {
+      "type":"string",
+      "format":"date-time"
+    },
+    "timeframe":
+    {
+      "type":"string",
+      "format":"date-time"
+    },
+    "currentPositiveVoteState":
+    {
+      "type":"string"
+    },
+    "currentNegativeVoteState":
+    {
+      "type":"string"
+    },
+    "content":
+    {
+      "type":"string"
+    },
+    "typeContent":
+    {
+      "type":"string"
+    },
+    "content":
+    {
+      "type":"string"
+    },
+    "channel":
+    {
+      "type":"string"
+    },
+
+    "items":
+    {
+      "type":"array",
+      "items":
+      {
+        "$ref":"uservote"
+      }
+    }
+  },
+  "required":["id","owner"]
+}

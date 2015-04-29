@@ -22,7 +22,7 @@ public class ApiFeature implements Feature
 	@Override
 	public boolean configure(final FeatureContext context)
 	{
-		context.register(DefaultWishlistsResource.class);
+		context.register(DefaultWhattodosResource.class);
 		return true;
 	}
 }

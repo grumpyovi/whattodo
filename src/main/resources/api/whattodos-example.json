@@ -1,11 +1,13 @@
 [
   {
-    "id":"98hw85Y945e6U358",
-    "url":"http://myApi.de/wishlists/98hw85Y945e6U358",
-    "owner":"345MWyh7w4hY98W6",
-    "title":"Floyd's Birthday Wishlist",
+    "id":"1",
+    "owner":"TestUser",
     "description":"Bring on the presents:)",
     "createdAt":"2012-07-12T12:42:23.777Z",
+    "timeframe":"2012-07-13T12:42:23.777Z",
+    "content":"http://myApi.de/whattodo/98hw85Y945e6U358",
+    "typeContent":"URL",
+    "channel":"1"
     "items":
     [
       {

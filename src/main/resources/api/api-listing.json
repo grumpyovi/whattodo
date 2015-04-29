@@ -1,5 +1,5 @@
 {
-    "name": "hybris Service",
+    "name": "whattodo Service",
     "references":[
         {
             "namespace": "api",

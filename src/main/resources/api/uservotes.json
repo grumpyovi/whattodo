@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title":"Collection of Wishlists",
+  "title":"Collection of uservotes",
   "type":"array",
   "items":
   {
-    "$ref":"wishlist"
+    "$ref":"uservote"
   }
 }
