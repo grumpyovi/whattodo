@@ -214,10 +214,13 @@ public class WhattodoService
 		result.setDescription(descriptption);
 		result.setItems(data.getItems());
 		result.setOwner(data.getOwner());
-		result.setTitle(data.getTitle());
-		result.set(data.getUrl());
+		result.setContent(data.getContent());
+		result.setChannel(data.getChannel());
 		result.setCreatedAt(data.getCreatedAt());
-
+		result.setCurrentNegativeVoteState(data.getCurrentNegativeVoteState());
+		result.setCurrentPositiveVoteState(data.getCurrentPositiveVoteState());
+		result.setTimeframe(data.getTimeframe());
+		result.setTypeContent(data.getTypeContent());
 		return result;
 	}
 }
