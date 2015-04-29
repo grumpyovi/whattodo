@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.grumpy.whattodo.api.generated.Whattodo;
+import com.grumpy.whattodo.api.generated.YaasAwareParameters;
+import com.grumpy.whattodo.utility.ErrorHandler;
 
 
 @ManagedBean
@@ -38,15 +40,15 @@ public class WhattodoService
 	}
 
 	/* GET / */
-	public Response get(final AppAwareParameters appAware)
+	public Response get(final YaasAwareParameters yassAware)
 	{
-		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
+		final String authorization = oAuth2Client.requestAccessToken(yassAware.getHybrisTenant());
 
 		final DocumentRepositoryClient client = new DocumentRepositoryClient(DocumentRepositoryClient.DEFAULT_BASE_URI);
 		Response response = null;
 		try
 		{
-			response = client.tenant(appAware.getHybrisTenant())
+			response = client.tenant(yassAware.getHybrisTenant())
 					.clientData(this.clientId)
 					.type(WHATTODO_PATH)
 					.prepareGet()
@@ -63,35 +65,35 @@ public class WhattodoService
 			throw new InternalServerErrorException();
 		}
 
-		final DocumentWishlist[] responseData = response.readEntity(DocumentWishlist[].class);
-		final ArrayList<Whattodo> wishlists = new ArrayList<Whattodo>();
-		for (final DocumentWishlist documentWishlist : responseData)
+		final DocumentWhattodo[] responseData = response.readEntity(DocumentWhattodo[].class);
+		final ArrayList<Whattodo> whattodos = new ArrayList<Whattodo>();
+		for (final DocumentWhattodo documentWhattodo : responseData)
 		{
 
-			wishlists.add(mapDocumentData(documentWishlist));
+			whattodos.add(mapDocumentData(documentWhattodo));
 		}
 
-		return Response.ok().entity(wishlists).build();
+		return Response.ok().entity(whattodos).build();
 	}
 
 	/* POST / */
-	public Response post(final AppAwareParameters appAware, final UriInfo uriInfo, final Wishlist wishlist)
+	public Response post(final YaasAwareParameters yassAware, final UriInfo uriInfo, final Whattodo whattodo)
 	{
-		final String wishlistId = wishlist.getId();
+		final String whattodoId = whattodo.getId();
 
-		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
+		final String authorization = oAuth2Client.requestAccessToken(yassAware.getHybrisTenant());
 
 		final DocumentRepositoryClient client = new DocumentRepositoryClient(DocumentRepositoryClient.DEFAULT_BASE_URI);
 		Response response = null;
 		try
 		{
-			response = client.tenant(appAware.getHybrisTenant())
+			response = client.tenant(yassAware.getHybrisTenant())
 					.clientData(this.clientId)
 					.type(WHATTODO_PATH)
-					.dataId(wishlistId)
+					.dataId(whattodoId)
 					.preparePost()
 					.withHeader("Authorization", authorization)
-					.withPayload(Entity.json(wishlist))
+					.withPayload(Entity.json(whattodo))
 					.execute();
 		}
 		catch (final HttpClientErrorException e)
@@ -109,19 +111,19 @@ public class WhattodoService
 		return Response.created(createdLocation).build();
 	}
 
-	/* GET //{wishlistId} */
-	public Response getByWishlistId(final AppAwareParameters appAware, final java.lang.String wishlistId)
+	/* GET //{whattodoId} */
+	public Response getByWhattodoId(final YaasAwareParameters yassAware, final java.lang.String whattodoId)
 	{
-		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
+		final String authorization = oAuth2Client.requestAccessToken(yassAware.getHybrisTenant());
 
 		final DocumentRepositoryClient client = new DocumentRepositoryClient(DocumentRepositoryClient.DEFAULT_BASE_URI);
 		Response response = null;
 		try
 		{
-			response = client.tenant(appAware.getHybrisTenant())
+			response = client.tenant(yassAware.getHybrisTenant())
 					.clientData(this.clientId)
 					.type(WHATTODO_PATH)
-					.dataId(wishlistId)
+					.dataId(whattodoId)
 					.prepareGet()
 					.withHeader("Authorization", authorization)
 					.execute();
@@ -136,28 +138,28 @@ public class WhattodoService
 			throw new InternalServerErrorException();
 		}
 
-		final DocumentWishlist data = response.readEntity(DocumentWishlist.class);
+		final DocumentWhattodo data = response.readEntity(DocumentWhattodo.class);
 		return Response.ok(mapDocumentData(data)).build();
 
 	}
 
-	/* PUT //{wishlistId} */
-	public Response putByWishlistId(final AppAwareParameters appAware, final java.lang.String wishlistId,
-			final Wishlist wishlist)
+	/* PUT //{whattodoId} */
+	public Response putByWhattodoId(final YaasAwareParameters yassAware, final java.lang.String whattodoId,
+			final Whattodo whattodo)
 	{
-		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
+		final String authorization = oAuth2Client.requestAccessToken(yassAware.getHybrisTenant());
 
 		final DocumentRepositoryClient client = new DocumentRepositoryClient(DocumentRepositoryClient.DEFAULT_BASE_URI);
 		Response response = null;
 		try
 		{
-			response = client.tenant(appAware.getHybrisTenant())
+			response = client.tenant(yassAware.getHybrisTenant())
 					.clientData(this.clientId)
 					.type(WHATTODO_PATH)
-					.dataId(wishlistId)
+					.dataId(whattodoId)
 					.preparePut()
 					.withHeader("Authorization", authorization)
-					.withPayload(Entity.json(wishlist))
+					.withPayload(Entity.json(whattodo))
 					.execute();
 		}
 		catch (final HttpClientErrorException e)
@@ -173,20 +175,20 @@ public class WhattodoService
 		return Response.ok().build();
 	}
 
-	/* DELETE //{wishlistId} */
-	public Response deleteByWishlistId(final AppAwareParameters appAware, final java.lang.String wishlistId)
+	/* DELETE //{whattodoId} */
+	public Response deleteByWhattodoId(final YaasAwareParameters yassAware, final java.lang.String whattodoId)
 	{
-		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
+		final String authorization = oAuth2Client.requestAccessToken(yassAware.getHybrisTenant());
 
 		final DocumentRepositoryClient client = new DocumentRepositoryClient(DocumentRepositoryClient.DEFAULT_BASE_URI);
 		Response response = null;
 		try
 		{
-			response = client.tenant(appAware.getHybrisTenant())
+			response = client.tenant(yassAware.getHybrisTenant())
 
 					.clientData(this.clientId)
 					.type(WHATTODO_PATH)
-					.dataId(wishlistId)
+					.dataId(whattodoId)
 					.prepareDelete()
 					.withHeader("Authorization", authorization)
 					.execute();
@@ -204,16 +206,16 @@ public class WhattodoService
 		return Response.noContent().build();
 	}
 
-	private Wishlist mapDocumentData(final DocumentWishlist data)
+	private Whattodo mapDocumentData(final DocumentWhattodo data)
 	{
-		final Wishlist result = new Wishlist();
+		final Whattodo result = new Whattodo();
 		result.setId(data.getId());
 		final String descriptption = data.getDescription();
 		result.setDescription(descriptption);
 		result.setItems(data.getItems());
 		result.setOwner(data.getOwner());
 		result.setTitle(data.getTitle());
-		result.setUrl(data.getUrl());
+		result.set(data.getUrl());
 		result.setCreatedAt(data.getCreatedAt());
 
 		return result;
