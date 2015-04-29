@@ -6,7 +6,7 @@ applications:
   memory: 1024M
   host: grumpyapp-v1
   domain: cf3.hybris.com
-  path: target/topproduct.war
+  path: target/whattodo.war
   env:
     ENV_NAME: hybris_hackathon
     TEAM_NAME: hybris_hackathon
