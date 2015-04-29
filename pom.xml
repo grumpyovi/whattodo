@@ -188,7 +188,62 @@
 				</configuration>
 			</plugin>
 			
-
+			<!-- generate configuration service client -->
+			<plugin>
+				<groupId>com.hybris.ramler</groupId>
+				<artifactId>ramler-maven-plugin</artifactId>
+				<version>${ramler.version}</version>
+				<executions>
+					<execution>
+						<id>repository-service-client</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourceRamlUri>https://api.yaas.io/hybris/repository/b1/api-console/raml/api/document-repository.raml</sourceRamlUri>
+							<targetFolder>${project.basedir}/target/generated-sources/repository-service-client/</targetFolder>
+							<basePackage>com.hybris.repository.client</basePackage>
+						</configuration>
+					</execution>
+					<execution>
+						<id>media-service-client</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourceRamlUri>https://api.yaas.io/hybris/media-repository/b1/api-console/raml/api/media-repository.raml</sourceRamlUri>
+							<targetFolder>${project.basedir}/target/generated-sources/media-service-client/</targetFolder>
+							<basePackage>com.hybris.media.client</basePackage>
+						</configuration>
+					</execution>
+					<execution>
+						<id>product-service-client</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourceRamlUri>https://api.yaas.io/product/v3/api-console/raml/api/api-specification.raml</sourceRamlUri>
+							<targetFolder>${project.basedir}/target/generated-sources/product-service-client/</targetFolder>
+							<basePackage>com.hybris.product.client</basePackage>
+						</configuration>
+					</execution>
+					<execution>
+						<id>oauth2-client</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourceRamlUri>https://api.yaas.io/oauth2/v1/api-console/raml/api/proxy/proxy-oauth2-specification.raml</sourceRamlUri>
+							<targetFolder>${project.basedir}/target/generated-sources/oauth2-client/</targetFolder>
+							<basePackage>com.hybris.oauth2.client</basePackage>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>	
 		</plugins>
 		<pluginManagement>
 			<plugins>
