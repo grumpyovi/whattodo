@@ -1,0 +1,14 @@
+{
+    "name": "hybris Service",
+    "references":[
+        {
+            "namespace": "api",
+            "description": "API definition of whattodo",
+            "path": "/",
+            "type": "raml",
+            "fileName": "whattodo.raml",
+            "packageName": "com.grumpy.whattodo.api.generated",
+            "async": false
+        }
+    ]
+}
