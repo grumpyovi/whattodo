@@ -11,6 +11,18 @@ public class DocumentUservote extends Uservote
 	@JsonIgnore
 	private DocumentMetaData _metaData;
 
+	private String whatToDoFk;
+
+	public String getWhatToDoFk()
+	{
+		return whatToDoFk;
+	}
+
+	public void setWhatToDoFk(final String whatToDoFk)
+	{
+		this.whatToDoFk = whatToDoFk;
+	}
+
 	public DocumentMetaData getMetadata()
 	{
 		return _metaData;
