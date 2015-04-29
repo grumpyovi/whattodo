@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.hybris.service-sdk.superpoms</groupId>
+		<groupId>com.hybris.service-sdk-internal.superpoms</groupId>
 		<artifactId>superpom</artifactId>
-		<version>3.9.0</version>
+		<version>3.4.0</version>
 		<relativePath />
 	</parent>
 
@@ -17,27 +17,44 @@
 
 	<properties>
 		<!-- hybris projects -->
+		<maven.clean.plugin.version>2.6.1</maven.clean.plugin.version>		
+		<jetty.plugin.version>9.2.6.v20141205</jetty.plugin.version>
 		<service-sdk.version>3.9.0</service-sdk.version>
 
 		<!-- plugins -->
 		<jetty.plugin.version>9.2.6.v20141205</jetty.plugin.version>
+		<servicesdk.version>3.9.0</servicesdk.version>
+		<servicesdkinternal.version>3.8.2-SNAPSHOT</servicesdkinternal.version>
 
 		<!-- libraries -->
+		<spring.version>4.1.5.RELEASE</spring.version>
 		<jaxrs.version>2.0.1</jaxrs.version>
-		<jersey.version>2.14</jersey.version>
+		<jackson.version>2.4.4</jackson.version>
+		<jersey.version>2.16</jersey.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
-		<spring.version>4.1.4.RELEASE</spring.version>
 		<cors.filter.version>2.2.1</cors.filter.version>
-
+	
+		<ramler.version>1.0.0</ramler.version>		
 		<!-- test libraries -->
 		<junit.version>4.12</junit.version>
+		<maven.dependency.plugin.version>2.9</maven.dependency.plugin.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
+			<groupId>com.hybris.ramler</groupId>
+			<artifactId>ramler-support</artifactId>
+			<version>${ramler.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.hybris.service-sdk.libraries</groupId>
 			<artifactId>libraries</artifactId>
 			<version>${service-sdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.service-sdk-internal.libraries</groupId>
+			<artifactId>libraries</artifactId>
+			<version>${servicesdkinternal.version}</version>
 		</dependency>
 
 		<!-- Jersey Dependencies -->
@@ -188,7 +205,15 @@
 									<pluginExecutionFilter>
 										<groupId>com.hybris.service-sdk.plugins</groupId>
 										<artifactId>apigenerator-maven-plugin</artifactId>
-										<versionRange>[${service-sdk.version},)</versionRange>
+										<versionRange>[${servicesdk.version},)</versionRange>
+										<goals>
+											<goal>generate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<pluginExecutionFilter>
+										<groupId>com.hybris.ramler</groupId>
+										<artifactId>ramler-maven-plugin</artifactId>
+										<version>1.0.0-SNAPSHOT</version>
 										<goals>
 											<goal>generate</goal>
 										</goals>
