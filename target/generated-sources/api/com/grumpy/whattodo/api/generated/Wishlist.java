@@ -26,7 +26,7 @@ import com.grumpy.whattodo.api.generated.util.OneOfDeserializerUtility;
 /**
  * Generated dto.
  */
-@javax.annotation.Generated(value = "hybris", date = "Wed Apr 29 11:47:03 CEST 2015")
+@javax.annotation.Generated(value = "hybris", date = "Wed Apr 29 13:23:19 CEST 2015")
 @XmlRootElement
 public class Wishlist
 {
