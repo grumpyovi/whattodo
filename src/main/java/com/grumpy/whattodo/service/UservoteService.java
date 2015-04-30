@@ -161,7 +161,7 @@ public class UservoteService
 			response = client.tenant(appAware.getHybrisTenant())
 					.clientData(this.clientId)
 					.type(USERVOTE_PATH)
-					.dataId(uservoteId)
+					.dataId(documentId)
 					.preparePost()
 					.withHeader("Authorization", authorization)
 					.withPayload(Entity.json(documentUserVote))
