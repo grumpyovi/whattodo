@@ -40,8 +40,13 @@ public class UservoteService
 		this.clientId = clientId;
 	}
 
-	/* GET / */
-	public Response get(final YaasAwareParameters appAware)
+	/**
+	 * GET /
+	 * 
+	 * Get all Uservotes
+	 * 
+	 * */
+	public List<Uservote> get(final YaasAwareParameters appAware)
 	{
 		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
 
@@ -54,45 +59,6 @@ public class UservoteService
 					.type(USERVOTE_PATH)
 					.prepareGet()
 					.withHeader("Authorization", authorization)
-					.execute();
-		}
-		catch (final HttpClientErrorException e)
-		{
-			ErrorHandler.handleResponseStatusCode(e);
-		}
-
-		if (response.getStatus() != Status.OK.getStatusCode())
-		{
-			throw new InternalServerErrorException();
-		}
-
-		final DocumentUservote[] responseData = response.readEntity(DocumentUservote[].class);
-		final ArrayList<Uservote> uservotes = new ArrayList<Uservote>();
-		for (final DocumentUservote documentuservote : responseData)
-		{
-
-			uservotes.add(mapDocumentData(documentuservote));
-		}
-
-		return Response.ok().entity(uservotes).build();
-	}
-
-	public List<Uservote> getByWhattodoId(final YaasAwareParameters appAware, final String whattodoId)
-	{
-
-		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
-
-		final DocumentRepositoryClient client = new DocumentRepositoryClient(DocumentRepositoryClient.DEFAULT_BASE_URI);
-		Response response = null;
-		try
-		{
-
-			response = client.tenant(appAware.getHybrisTenant())
-					.clientData(this.clientId)
-					.type(USERVOTE_PATH)
-					.prepareGet()
-					.withHeader("Authorization", authorization)
-					.withQuery("whatToDoFk", whattodoId)
 					.execute();
 		}
 		catch (final HttpClientErrorException e)
@@ -116,10 +82,15 @@ public class UservoteService
 		return uservotes;
 	}
 
-	/* POST / */
-	public Response post(final YaasAwareParameters appAware, final UriInfo uriInfo, final Uservote Uservote)
+	/**
+	 * Get all uservotes for whattodo item
+	 * 
+	 * @param appAware
+	 * @param whattodoId
+	 * @return
+	 */
+	public List<Uservote> getByWhattodoId(final YaasAwareParameters appAware, final String whattodoId)
 	{
-		final String uservoteId = Uservote.getUserid();
 
 		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
 
@@ -127,13 +98,13 @@ public class UservoteService
 		Response response = null;
 		try
 		{
+
 			response = client.tenant(appAware.getHybrisTenant())
 					.clientData(this.clientId)
 					.type(USERVOTE_PATH)
-					.dataId(uservoteId)
-					.preparePost()
+					.prepareGet()
 					.withHeader("Authorization", authorization)
-					.withPayload(Entity.json(Uservote))
+					.withQ("whatToDoFk" + whattodoId)
 					.execute();
 		}
 		catch (final HttpClientErrorException e)
@@ -141,14 +112,20 @@ public class UservoteService
 			ErrorHandler.handleResponseStatusCode(e);
 		}
 
-		if (response.getStatus() != Status.CREATED.getStatusCode())
+		if (response.getStatus() != Status.OK.getStatusCode())
 		{
 			throw new InternalServerErrorException();
 		}
 
-		final ResourceLocation location = response.readEntity(ResourceLocation.class);
-		final URI createdLocation = uriInfo.getRequestUriBuilder().path("/" + location.getId()).build();
-		return Response.created(createdLocation).build();
+		final DocumentUservote[] responseData = response.readEntity(DocumentUservote[].class);
+		final ArrayList<Uservote> uservotes = new ArrayList<Uservote>();
+		for (final DocumentUservote documentuservote : responseData)
+		{
+
+			uservotes.add(mapDocumentData(documentuservote));
+		}
+
+		return uservotes;
 	}
 
 	/**
@@ -201,7 +178,7 @@ public class UservoteService
 		return createdLocation;
 	}
 
-	/* GET //{wishlistId} */
+	/* GET //{userVoteId} */
 	public Uservote getByUservoteId(final YaasAwareParameters appAware, final java.lang.String userVoteId)
 	{
 		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
@@ -231,69 +208,6 @@ public class UservoteService
 		final DocumentUservote data = response.readEntity(DocumentUservote.class);
 		return mapDocumentData(data);
 
-	}
-
-	/* PUT //{wishlistId} */
-	public Response putByWishlistId(final YaasAwareParameters appAware, final java.lang.String uservoteId,
-			final Uservote Uservote)
-	{
-		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
-
-		final DocumentRepositoryClient client = new DocumentRepositoryClient(DocumentRepositoryClient.DEFAULT_BASE_URI);
-		Response response = null;
-		try
-		{
-			response = client.tenant(appAware.getHybrisTenant())
-					.clientData(this.clientId)
-					.type(USERVOTE_PATH)
-					.dataId(uservoteId)
-					.preparePut()
-					.withHeader("Authorization", authorization)
-					.withPayload(Entity.json(Uservote))
-					.execute();
-		}
-		catch (final HttpClientErrorException e)
-		{
-			ErrorHandler.handleResponseStatusCode(e);
-		}
-
-		if (response.getStatus() != Status.OK.getStatusCode())
-		{
-			throw new InternalServerErrorException();
-		}
-
-		return Response.ok().build();
-	}
-
-	/* DELETE //{wishlistId} */
-	public Response deleteByWishlistId(final YaasAwareParameters appAware, final java.lang.String uservoteId)
-	{
-		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
-
-		final DocumentRepositoryClient client = new DocumentRepositoryClient(DocumentRepositoryClient.DEFAULT_BASE_URI);
-		Response response = null;
-		try
-		{
-			response = client.tenant(appAware.getHybrisTenant())
-
-					.clientData(this.clientId)
-					.type(USERVOTE_PATH)
-					.dataId(uservoteId)
-					.prepareDelete()
-					.withHeader("Authorization", authorization)
-					.execute();
-		}
-		catch (final HttpClientErrorException e)
-		{
-			ErrorHandler.handleResponseStatusCode(e);
-		}
-
-		if (response.getStatus() != Status.NO_CONTENT.getStatusCode())
-		{
-			throw new InternalServerErrorException();
-		}
-
-		return Response.noContent().build();
 	}
 
 	private Uservote mapDocumentData(final DocumentUservote data)
