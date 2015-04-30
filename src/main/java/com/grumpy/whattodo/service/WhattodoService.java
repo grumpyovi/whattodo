@@ -5,6 +5,7 @@ import com.hybris.repository.client.DocumentRepositoryClient;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
@@ -40,7 +41,7 @@ public class WhattodoService
 	}
 
 	/* GET / */
-	public Response get(final YaasAwareParameters yassAware)
+	public List<Whattodo> get(final YaasAwareParameters yassAware)
 	{
 		final String authorization = oAuth2Client.requestAccessToken(yassAware.getHybrisTenant());
 
@@ -73,11 +74,11 @@ public class WhattodoService
 			whattodos.add(mapDocumentData(documentWhattodo));
 		}
 
-		return Response.ok().entity(whattodos).build();
+		return whattodos;
 	}
 
 	/* POST / */
-	public Response post(final YaasAwareParameters yassAware, final UriInfo uriInfo, final Whattodo whattodo)
+	public URI post(final YaasAwareParameters yassAware, final UriInfo uriInfo, final Whattodo whattodo)
 	{
 		final String whattodoId = whattodo.getId();
 
@@ -108,11 +109,11 @@ public class WhattodoService
 
 		final ResourceLocation location = response.readEntity(ResourceLocation.class);
 		final URI createdLocation = uriInfo.getRequestUriBuilder().path("/" + location.getId()).build();
-		return Response.created(createdLocation).build();
+		return createdLocation;
 	}
 
 	/* GET //{whattodoId} */
-	public Response getByWhattodoId(final YaasAwareParameters yassAware, final java.lang.String whattodoId)
+	public Whattodo getByWhattodoId(final YaasAwareParameters yassAware, final java.lang.String whattodoId)
 	{
 		final String authorization = oAuth2Client.requestAccessToken(yassAware.getHybrisTenant());
 
@@ -139,7 +140,7 @@ public class WhattodoService
 		}
 
 		final DocumentWhattodo data = response.readEntity(DocumentWhattodo.class);
-		return Response.ok(mapDocumentData(data)).build();
+		return mapDocumentData(data);
 
 	}
 
