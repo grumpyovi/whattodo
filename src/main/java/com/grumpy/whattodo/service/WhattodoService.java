@@ -80,7 +80,7 @@ public class WhattodoService
 	/* POST / */
 	public URI post(final YaasAwareParameters yassAware, final UriInfo uriInfo, final Whattodo whattodo)
 	{
-		final String whattodoId = whattodo.getId();
+		// final String whattodoId = whattodo.getId();
 
 		final String authorization = oAuth2Client.requestAccessToken(yassAware.getHybrisTenant());
 
@@ -91,7 +91,8 @@ public class WhattodoService
 			response = client.tenant(yassAware.getHybrisTenant())
 					.clientData(this.clientId)
 					.type(WHATTODO_PATH)
-					.dataId(whattodoId)
+					// .dataId()
+					// .dataId(whattodoId)
 					.preparePost()
 					.withHeader("Authorization", authorization)
 					.withPayload(Entity.json(whattodo))
@@ -109,6 +110,7 @@ public class WhattodoService
 
 		final ResourceLocation location = response.readEntity(ResourceLocation.class);
 		final URI createdLocation = uriInfo.getRequestUriBuilder().path("/" + location.getId()).build();
+		System.out.println("ID: " + location.getId());
 		return createdLocation;
 	}
 
