@@ -124,21 +124,6 @@ public final class DefaultWhattodosResourceTest extends com.grumpy.whattodo.api.
 		Assert.assertEquals("Response does not have expected response code", Status.CREATED.getStatusCode(), response.getStatus());
 	}
 
-	/* post(entity) /whattodos/whattodoid/uservotes/uservoteid */
-	@Test
-	public void testPostByWhattodoidUservotesByUservoteidWithString()
-	{
-		final WebTarget target = getRootTarget(ROOT_RESOURCE_PATH).path("/whattodoid/uservotes/uservoteid");
-		final java.lang.String entityBody = "test";
-		final javax.ws.rs.client.Entity<java.lang.String> entity =
-		javax.ws.rs.client.Entity.entity(entityBody,"application/json");
-
-		final Response response = target.request().post(entity);
-
-		Assert.assertNotNull("Response must not be null", response);
-		Assert.assertEquals("Response does not have expected response code", Status.CREATED.getStatusCode(), response.getStatus());
-	}
-
 	/* get() /whattodos/whattodoid/uservotes/uservoteid */
 	@Test
 	public void testGetByWhattodoidUservotesByUservoteid()
