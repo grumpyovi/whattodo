@@ -61,5 +61,5 @@
       }
     }
   },
-  "required":["id","owner"]
+  "required":["owner"]
 }
