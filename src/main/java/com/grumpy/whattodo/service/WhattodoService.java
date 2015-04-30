@@ -78,8 +78,10 @@ public class WhattodoService
 
 			final Whattodo whattodo = mapDocumentData(documentWhattodo);
 			final List<Uservote> uservotes = uservoteService.getByWhattodoId(yassAware, whattodo.getId());
-			whattodo.setCurrentPositiveVoteState(getCountVotes(true, uservotes)); // getPositive
-			whattodo.setCurrentNegativeVoteState(getCountVotes(false, uservotes)); // getNegative
+			final String totalVotes = String.valueOf(uservotes.size());
+			whattodo.setCurrentPositiveVoteState(getCountVotes(true, uservotes) + " of " + totalVotes); // getPositive
+			whattodo.setCurrentNegativeVoteState(getCountVotes(false, uservotes) + " of " + totalVotes); // getNegative
+			whattodo.setTotal(totalVotes);
 			whattodos.add(whattodo);
 		}
 
@@ -157,8 +159,10 @@ public class WhattodoService
 
 		whattodo.setItems(uservotes);
 
-		whattodo.setCurrentPositiveVoteState(getCountVotes(true, uservotes)); // getPositive
-		whattodo.setCurrentNegativeVoteState(getCountVotes(false, uservotes)); // getNegative
+		final String totalVotes = String.valueOf(uservotes.size());
+		whattodo.setCurrentPositiveVoteState(getCountVotes(true, uservotes) + " of " + totalVotes); // getPositive
+		whattodo.setCurrentNegativeVoteState(getCountVotes(false, uservotes) + " of " + totalVotes); // getNegative
+		whattodo.setTotal(totalVotes);
 
 		System.out.println("uservotes: " + uservotes);
 

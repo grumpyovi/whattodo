@@ -51,6 +51,10 @@
     {
       "type":"string"
     },
+    "total":
+    {
+      "type":"string"
+    },
 
     "items":
     {
