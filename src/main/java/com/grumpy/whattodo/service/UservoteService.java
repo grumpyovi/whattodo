@@ -117,6 +117,8 @@ public class UservoteService
 			throw new InternalServerErrorException();
 		}
 
+		// final Object[] responseDataObj = response.readEntity(Object[].class);
+		// responseDataObj.toString();
 		final DocumentUservote[] responseData = response.readEntity(DocumentUservote[].class);
 		final ArrayList<Uservote> uservotes = new ArrayList<Uservote>();
 		for (final DocumentUservote documentuservote : responseData)
@@ -141,13 +143,14 @@ public class UservoteService
 			final String whattodoId)
 	{
 		final String uservoteId = userVote.getUserid();
-		final String documentId = whattodoId + "/" + uservoteId;
+		final String documentId = whattodoId + "|" + uservoteId;
 
 		final DocumentUservote documentUserVote = new DocumentUservote();
 		documentUserVote.setDocumentId(documentId);
 		documentUserVote.setWhatToDoFk(whattodoId);
 		documentUserVote.setUserid(uservoteId);
 		documentUserVote.setVote(userVote.isVote());
+		documentUserVote.setMetadata(new DocumentMetaData());
 
 		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
 
