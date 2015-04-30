@@ -104,7 +104,7 @@ public class UservoteService
 					.type(USERVOTE_PATH)
 					.prepareGet()
 					.withHeader("Authorization", authorization)
-					.withQ("whatToDoFk" + whattodoId)
+					.withQ("whatToDoFk:\"" + whattodoId + "\"")
 					.execute();
 		}
 		catch (final HttpClientErrorException e)
@@ -141,12 +141,13 @@ public class UservoteService
 			final String whattodoId)
 	{
 		final String uservoteId = userVote.getUserid();
+		final String documentId = whattodoId + "/" + uservoteId;
 
 		final DocumentUservote documentUserVote = new DocumentUservote();
+		documentUserVote.setDocumentId(documentId);
 		documentUserVote.setWhatToDoFk(whattodoId);
 		documentUserVote.setUserid(uservoteId);
 		documentUserVote.setVote(userVote.isVote());
-
 
 		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
 

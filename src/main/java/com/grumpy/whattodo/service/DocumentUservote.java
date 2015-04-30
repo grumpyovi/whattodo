@@ -6,12 +6,29 @@ import com.grumpy.whattodo.api.generated.Uservote;
 
 public class DocumentUservote extends Uservote
 {
-	@javax.validation.constraints.Pattern(regexp = "^.+")
+/*	@javax.validation.constraints.Pattern(regexp = "^.+")
 	@javax.validation.constraints.NotNull
-	@JsonIgnore
+	@JsonIgnore*/
 	private DocumentMetaData _metaData;
 
 	private String whatToDoFk;
+	private String documentId;
+
+	/**
+	 * @return the documentId
+	 */
+	public String getDocumentId()
+	{
+		return documentId;
+	}
+
+	/**
+	 * @param documentId the documentId to set
+	 */
+	public void setDocumentId(final String documentId)
+	{
+		this.documentId = documentId;
+	}
 
 	public String getWhatToDoFk()
 	{
@@ -23,7 +40,7 @@ public class DocumentUservote extends Uservote
 		this.whatToDoFk = whatToDoFk;
 	}
 
-	public DocumentMetaData getMetadata()
+/*	public DocumentMetaData getMetadata()
 	{
 		return _metaData;
 	}
@@ -31,5 +48,5 @@ public class DocumentUservote extends Uservote
 	public void setMetadata(final DocumentMetaData _metaData)
 	{
 		this._metaData = _metaData;
-	}
+	}*/
 }
