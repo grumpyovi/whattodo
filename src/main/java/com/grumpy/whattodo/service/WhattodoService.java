@@ -76,7 +76,11 @@ public class WhattodoService
 		for (final DocumentWhattodo documentWhattodo : responseData)
 		{
 
-			whattodos.add(mapDocumentData(documentWhattodo));
+			final Whattodo whattodo = mapDocumentData(documentWhattodo);
+			final List<Uservote> uservotes = uservoteService.getByWhattodoId(yassAware, whattodo.getId());
+			whattodo.setCurrentPositiveVoteState(getCountVotes(true, uservotes)); // getPositive
+			whattodo.setCurrentNegativeVoteState(getCountVotes(false, uservotes)); // getNegative
+			whattodos.add(whattodo);
 		}
 
 		return whattodos;
@@ -153,9 +157,12 @@ public class WhattodoService
 
 		whattodo.setItems(uservotes);
 
+		whattodo.setCurrentPositiveVoteState(getCountVotes(true, uservotes)); // getPositive
+		whattodo.setCurrentNegativeVoteState(getCountVotes(false, uservotes)); // getNegative
+
 		System.out.println("uservotes: " + uservotes);
 
-		return data;
+		return whattodo;
 
 	}
 
@@ -220,6 +227,26 @@ public class WhattodoService
 		}
 
 		return Response.noContent().build();
+	}
+
+	public String getCountVotes(final Boolean isPositive, final List<Uservote> uservotesList)
+	{
+
+		Integer pCount = 0;
+		Integer nCount = 0;
+		for (final Uservote userVote : uservotesList)
+		{
+			if (isPositive && userVote.isVote())
+			{
+				pCount++;
+			}
+			if (!isPositive && !userVote.isVote())
+			{
+				nCount++;
+			}
+		}
+
+		return isPositive.equals(true) ? String.valueOf(pCount) : String.valueOf(nCount);
 	}
 
 	private Whattodo mapDocumentData(final DocumentWhattodo data)
