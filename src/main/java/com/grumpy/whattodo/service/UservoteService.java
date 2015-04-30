@@ -141,12 +141,13 @@ public class UservoteService
 			final String whattodoId)
 	{
 		final String uservoteId = userVote.getUserid();
+		final String documentId = whattodoId + "/" + uservoteId;
 
 		final DocumentUservote documentUserVote = new DocumentUservote();
+		documentUserVote.setDocumentId(documentId);
 		documentUserVote.setWhatToDoFk(whattodoId);
 		documentUserVote.setUserid(uservoteId);
 		documentUserVote.setVote(userVote.isVote());
-
 
 		final String authorization = oAuth2Client.requestAccessToken(appAware.getHybrisTenant());
 
