@@ -18,6 +18,7 @@ import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.HttpClientErrorException;
 
+import com.grumpy.whattodo.api.generated.Uservote;
 import com.grumpy.whattodo.api.generated.Whattodo;
 import com.grumpy.whattodo.api.generated.YaasAwareParameters;
 import com.grumpy.whattodo.utility.ErrorHandler;
@@ -31,6 +32,10 @@ public class WhattodoService
 
 	@Inject
 	private com.grumpy.whattodo.client.OAuth2ServiceClient oAuth2Client;
+
+	@Inject
+	private UservoteService uservoteService;
+
 
 	private String clientId;
 
@@ -142,7 +147,15 @@ public class WhattodoService
 		}
 
 		final DocumentWhattodo data = response.readEntity(DocumentWhattodo.class);
-		return mapDocumentData(data);
+		final Whattodo whattodo = mapDocumentData(data);
+
+		final List<Uservote> uservotes = uservoteService.getByWhattodoId(yassAware, whattodo.getId());
+
+		whattodo.setItems(uservotes);
+
+		System.out.println("uservotes: " + uservotes);
+
+		return data;
 
 	}
 
